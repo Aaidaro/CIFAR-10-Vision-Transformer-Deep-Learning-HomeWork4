@@ -167,7 +167,7 @@ python scripts/main.py attention \
 
 The saved figure follows the format in the question: patched input, first attention head, and mean attention over heads for every requested layer.
 
-## Part 2.2(c), optional: pretrained `torchvision` ViT-B/16
+## Part 2.2(c): pretrained `torchvision` ViT-B/16
 
 The main assignment implementation does not use torchvision's ViT. This optional script is separate because the question explicitly permits pretrained `vit_b_16` for comparison.
 
