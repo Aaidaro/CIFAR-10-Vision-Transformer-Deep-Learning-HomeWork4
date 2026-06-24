@@ -175,9 +175,7 @@ The main assignment implementation does not use torchvision's ViT. This optional
 python scripts/main.py optional-pretrained-attention --layers 4 8 12 --target-class 3
 ```
 
-## Notes for reaching 60%+ test accuracy
 
-The default base config uses AdamW, cosine scheduling, warmup, label smoothing, random crop, horizontal flip, and cutout. On a GPU, start with 120 epochs. If the base model is under 60%, try:
 
 ```bash
 python scripts/main.py train --case base --epochs 180 --lr 0.0007
