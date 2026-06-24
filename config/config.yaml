@@ -1,0 +1,105 @@
+# Base configuration for the CIFAR-10 Vision Transformer homework.
+# All paths are relative to the project root unless overridden by CLI arguments.
+
+seed: 42
+
+experiment:
+  name: base
+  output_dir: outputs
+  save_dir: models/saved_models
+
+model:
+  image_size: 32
+  patch_size: 4
+  in_channels: 3
+  num_classes: 10
+  embed_dim: 128
+  depth: 4
+  num_heads: 8
+  mlp_hidden_dim: 128
+  dropout: 0.10
+  attention_dropout: 0.10
+
+train:
+  epochs: 120
+  batch_size: 128
+  num_workers: 2
+  optimizer: adamw
+  learning_rate: 0.0005
+  weight_decay: 0.05
+  warmup_epochs: 5
+  label_smoothing: 0.05
+  grad_clip_norm: 1.0
+  amp: true
+  validate_every: 1
+  save_best: true
+
+# Keep quick settings small so the TA can sanity-check the whole pipeline quickly.
+quick:
+  epochs: 2
+  subset_train: 1024
+  subset_val: 256
+  subset_test: 256
+  batch_size: 64
+
+data:
+  data_dir: data/dataset
+  validation_fraction: 0.10
+  subset_train: null
+  subset_val: null
+  subset_test: null
+  augment: true
+  random_crop_padding: 4
+  random_horizontal_flip: true
+  cutout: true
+  cutout_size: 8
+  normalize: true
+  mean: [0.4914, 0.4822, 0.4465]
+  std: [0.2470, 0.2435, 0.2616]
+
+cases:
+  base: {}
+  emb64:
+    experiment:
+      name: emb64
+    model:
+      embed_dim: 64
+  emb256:
+    experiment:
+      name: emb256
+    model:
+      embed_dim: 256
+    train:
+      batch_size: 96
+  depth2:
+    experiment:
+      name: depth2
+    model:
+      depth: 2
+  depth8:
+    experiment:
+      name: depth8
+    model:
+      depth: 8
+    train:
+      batch_size: 96
+  patch2:
+    experiment:
+      name: patch2
+    model:
+      patch_size: 2
+    train:
+      batch_size: 64
+  patch8:
+    experiment:
+      name: patch8
+    model:
+      patch_size: 8
+  resize64:
+    experiment:
+      name: resize64
+    model:
+      image_size: 64
+      patch_size: 4
+    train:
+      batch_size: 64
